@@ -1,0 +1,17 @@
+body {
+  max-width: 360px;
+  margin: auto;
+}
+
+.card-text-container {
+  top: 55%;
+  left: 16%;
+}
+
+.card-number {
+  top: 50%;
+}
+
+.card-name-exp {
+  top: 60%;
+}
