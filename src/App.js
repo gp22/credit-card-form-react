@@ -8,7 +8,6 @@ class App extends React.Component {
       number: "",
       expMonth: "",
       expYear: "",
-      expiration: "",
       cvv: ""
     };
   }
@@ -33,7 +32,6 @@ class App extends React.Component {
       number,
       expMonth,
       expYear,
-      expiration,
       cvv
     } = this.state;
 
@@ -42,7 +40,8 @@ class App extends React.Component {
         <CreditCardImage
           name={name}
           number={number}
-          expiration={expiration}
+          expMonth={expMonth}
+          expYear={expYear}
           cvv={cvv}
         />
         <CreditCardForm
@@ -52,7 +51,6 @@ class App extends React.Component {
           number={number}
           expMonth={expMonth}
           expYear={expYear}
-          expiration={expiration}
           cvv={cvv}
         />
       </div>
@@ -64,20 +62,19 @@ function CreditCardImage(props) {
   const {
     name,
     number,
-    expiration,
-    cvv
+    expMonth,
+    expYear,
   } = props;
 
   return (
     <section className="code relative mb4">
       <img src="./credit-card.jpg" alt="Credit Card"/>
-      <div className="absolute card-text-container">
-        <p className="mt0 mb3 f4">{number}</p>
-        <div className="flex f6">
+      <div className="absolute card-text-container w-two-thirds">
+        <p className="mt0 mb1 h2 f4">{number}</p>
+        <div className="flex f6 justify-between">
           <p className="mt0 mr3">{name}</p>
-          <p className="mt0">{expiration}</p>
+          <p className="mt0"><span>{expMonth}/{expYear}</span></p>
         </div>
-        <p>{cvv}</p>
       </div>
     </section>
   );
@@ -91,7 +88,6 @@ function CreditCardForm(props) {
     number,
     expMonth,
     expYear,
-    expiration,
     cvv
   } = props;
 
@@ -121,30 +117,49 @@ function CreditCardForm(props) {
       </div>
       <div className="mb4 flex justify-between">
         <div className="w3">
-          <label htmlFor="expiration" className="b db f7 mb2">Expiration</label>
-          <input
-            className="input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100"
-            id="expiration"
-            name="expiration"
-            type="text"
-            value={expiration}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="w3">
           <label htmlFor="expMonth" className="b db f7 mb2">Month</label>
           <select
-            className="input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100"
+            className="input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100"
             id="expMonth"
             name="expMonth"
             type="text"
             value={expMonth}
             onChange={handleChange}
           >
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option disabled value="">Select</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+        <div className="w3">
+          <label htmlFor="expYear" className="b db f7 mb2">Year</label>
+          <select
+            className="input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100"
+            id="expYear"
+            name="expYear"
+            type="text"
+            value={expYear}
+            onChange={handleChange}
+          >
+            <option disabled value="">Select</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
           </select>
         </div>
         <div className="w3">

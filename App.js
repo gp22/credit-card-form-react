@@ -31,11 +31,10 @@ var App = function (_React$Component) {
     };
 
     _this.state = {
-      name: "Roberto Rodriguez",
-      number: "1234 1234 1234 1234",
-      expMonth: "12",
-      expYear: "2017",
-      expiration: "00/00",
+      name: "",
+      number: "",
+      expMonth: "",
+      expYear: "",
       cvv: ""
     };
     return _this;
@@ -49,7 +48,6 @@ var App = function (_React$Component) {
           number = _state.number,
           expMonth = _state.expMonth,
           expYear = _state.expYear,
-          expiration = _state.expiration,
           cvv = _state.cvv;
 
 
@@ -59,7 +57,8 @@ var App = function (_React$Component) {
         React.createElement(CreditCardImage, {
           name: name,
           number: number,
-          expiration: expiration,
+          expMonth: expMonth,
+          expYear: expYear,
           cvv: cvv
         }),
         React.createElement(CreditCardForm, {
@@ -69,7 +68,6 @@ var App = function (_React$Component) {
           number: number,
           expMonth: expMonth,
           expYear: expYear,
-          expiration: expiration,
           cvv: cvv
         })
       );
@@ -82,25 +80,25 @@ var App = function (_React$Component) {
 function CreditCardImage(props) {
   var name = props.name,
       number = props.number,
-      expiration = props.expiration,
-      cvv = props.cvv;
+      expMonth = props.expMonth,
+      expYear = props.expYear;
 
 
   return React.createElement(
     "section",
-    { className: "code relative" },
+    { className: "code relative mb4" },
     React.createElement("img", { src: "./credit-card.jpg", alt: "Credit Card" }),
     React.createElement(
       "div",
-      { className: "absolute card-text-container" },
+      { className: "absolute card-text-container w-two-thirds" },
       React.createElement(
         "p",
-        { className: "mt0 mb3 f4" },
+        { className: "mt0 mb1 h2 f4" },
         number
       ),
       React.createElement(
         "div",
-        { className: "flex f6" },
+        { className: "flex f6 justify-between" },
         React.createElement(
           "p",
           { className: "mt0 mr3" },
@@ -109,13 +107,14 @@ function CreditCardImage(props) {
         React.createElement(
           "p",
           { className: "mt0" },
-          expiration
+          React.createElement(
+            "span",
+            null,
+            expMonth,
+            "/",
+            expYear
+          )
         )
-      ),
-      React.createElement(
-        "p",
-        null,
-        cvv
       )
     )
   );
@@ -128,7 +127,6 @@ function CreditCardForm(props) {
       number = props.number,
       expMonth = props.expMonth,
       expYear = props.expYear,
-      expiration = props.expiration,
       cvv = props.cvv;
 
 
@@ -177,30 +175,13 @@ function CreditCardForm(props) {
         { className: "w3" },
         React.createElement(
           "label",
-          { htmlFor: "expiration", className: "b db f7 mb2" },
-          "Expiration"
-        ),
-        React.createElement("input", {
-          className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
-          id: "expiration",
-          name: "expiration",
-          type: "text",
-          value: expiration,
-          onChange: handleChange
-        })
-      ),
-      React.createElement(
-        "div",
-        { className: "w3" },
-        React.createElement(
-          "label",
           { htmlFor: "expMonth", className: "b db f7 mb2" },
           "Month"
         ),
         React.createElement(
           "select",
           {
-            className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
+            className: "input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100",
             id: "expMonth",
             name: "expMonth",
             type: "text",
@@ -209,23 +190,133 @@ function CreditCardForm(props) {
           },
           React.createElement(
             "option",
-            { value: "grapefruit" },
-            "Grapefruit"
+            { disabled: true, value: "" },
+            "Select"
           ),
           React.createElement(
             "option",
-            { value: "lime" },
-            "Lime"
+            { value: "01" },
+            "01"
           ),
           React.createElement(
             "option",
-            { value: "coconut" },
-            "Coconut"
+            { value: "02" },
+            "02"
           ),
           React.createElement(
             "option",
-            { value: "mango" },
-            "Mango"
+            { value: "03" },
+            "03"
+          ),
+          React.createElement(
+            "option",
+            { value: "04" },
+            "04"
+          ),
+          React.createElement(
+            "option",
+            { value: "05" },
+            "05"
+          ),
+          React.createElement(
+            "option",
+            { value: "06" },
+            "06"
+          ),
+          React.createElement(
+            "option",
+            { value: "07" },
+            "07"
+          ),
+          React.createElement(
+            "option",
+            { value: "08" },
+            "08"
+          ),
+          React.createElement(
+            "option",
+            { value: "09" },
+            "09"
+          ),
+          React.createElement(
+            "option",
+            { value: "10" },
+            "10"
+          ),
+          React.createElement(
+            "option",
+            { value: "11" },
+            "11"
+          ),
+          React.createElement(
+            "option",
+            { value: "12" },
+            "12"
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "w3" },
+        React.createElement(
+          "label",
+          { htmlFor: "expYear", className: "b db f7 mb2" },
+          "Year"
+        ),
+        React.createElement(
+          "select",
+          {
+            className: "input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100",
+            id: "expYear",
+            name: "expYear",
+            type: "text",
+            value: expYear,
+            onChange: handleChange
+          },
+          React.createElement(
+            "option",
+            { disabled: true, value: "" },
+            "Select"
+          ),
+          React.createElement(
+            "option",
+            { value: "2019" },
+            "2019"
+          ),
+          React.createElement(
+            "option",
+            { value: "2020" },
+            "2020"
+          ),
+          React.createElement(
+            "option",
+            { value: "2021" },
+            "2021"
+          ),
+          React.createElement(
+            "option",
+            { value: "2022" },
+            "2022"
+          ),
+          React.createElement(
+            "option",
+            { value: "2023" },
+            "2023"
+          ),
+          React.createElement(
+            "option",
+            { value: "2024" },
+            "2024"
+          ),
+          React.createElement(
+            "option",
+            { value: "2025" },
+            "2025"
+          ),
+          React.createElement(
+            "option",
+            { value: "2026" },
+            "2026"
           )
         )
       ),
