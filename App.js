@@ -131,219 +131,163 @@ function CreditCardForm(props) {
 
 
   return React.createElement(
-    "form",
-    { className: "avenir mh4", onSubmit: handleSubmit },
+    "div",
+    null,
     React.createElement(
-      "div",
-      { className: "mb3" },
-      React.createElement(
-        "label",
-        { htmlFor: "number", className: "b db f7 mb2" },
-        "Card Number"
-      ),
-      React.createElement("input", {
-        className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
-        id: "number",
-        name: "number",
-        type: "text",
-        value: number,
-        onChange: handleChange
-      })
-    ),
-    React.createElement(
-      "div",
-      { className: "mb3" },
-      React.createElement(
-        "label",
-        { htmlFor: "name", className: "b db f7 mb2" },
-        "Name on Card"
-      ),
-      React.createElement("input", {
-        className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
-        id: "name",
-        name: "name",
-        type: "text",
-        value: name,
-        onChange: handleChange
-      })
-    ),
-    React.createElement(
-      "div",
-      { className: "mb4 flex justify-between" },
-      React.createElement(
-        "div",
-        { className: "w3" },
-        React.createElement(
-          "label",
-          { htmlFor: "expMonth", className: "b db f7 mb2" },
-          "Month"
-        ),
-        React.createElement(
-          "select",
-          {
-            className: "input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100",
-            id: "expMonth",
-            name: "expMonth",
-            type: "text",
-            value: expMonth,
-            onChange: handleChange
-          },
+      Formik.Formik,
+      {
+        initialValues: { number: number, name: name },
+        validate: function validate(values) {
+          var errors = {};
+          if (!values.number) {
+            errors.number = 'Required';
+          } else if (!/^(?:\d[ -]*?){13,16}$/gm.test(values.number)) {
+            errors.number = 'Invalid number';
+          }
+          return errors;
+        },
+        onSubmit: function onSubmit(values, _ref) {
+          var setSubmitting = _ref.setSubmitting;
+
+          setTimeout(function () {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }
+      },
+      function (_ref2) {
+        var isSubmitting = _ref2.isSubmitting;
+        return React.createElement(
+          Formik.Form,
+          { className: "avenir mh4" },
           React.createElement(
-            "option",
-            { disabled: true, value: "" },
-            "Select"
+            "div",
+            { className: "mb3" },
+            React.createElement(
+              "label",
+              { htmlFor: "number", className: "b db f7 mb2" },
+              "Card Number"
+            ),
+            React.createElement(Formik.Field, {
+              className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
+              type: "text",
+              name: "number",
+              id: "number"
+            }),
+            React.createElement(Formik.ErrorMessage, { name: "number", component: "div" })
           ),
           React.createElement(
-            "option",
-            { value: "01" },
-            "01"
+            "div",
+            { className: "mb3" },
+            React.createElement(
+              "label",
+              { htmlFor: "name", className: "b db f7 mb2" },
+              "Name on Card"
+            ),
+            React.createElement(Formik.Field, {
+              className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
+              type: "text",
+              name: "name",
+              id: "name"
+            }),
+            React.createElement(Formik.ErrorMessage, { name: "name", component: "div" })
           ),
           React.createElement(
-            "option",
-            { value: "02" },
-            "02"
-          ),
-          React.createElement(
-            "option",
-            { value: "03" },
-            "03"
-          ),
-          React.createElement(
-            "option",
-            { value: "04" },
-            "04"
-          ),
-          React.createElement(
-            "option",
-            { value: "05" },
-            "05"
-          ),
-          React.createElement(
-            "option",
-            { value: "06" },
-            "06"
-          ),
-          React.createElement(
-            "option",
-            { value: "07" },
-            "07"
-          ),
-          React.createElement(
-            "option",
-            { value: "08" },
-            "08"
-          ),
-          React.createElement(
-            "option",
-            { value: "09" },
-            "09"
-          ),
-          React.createElement(
-            "option",
-            { value: "10" },
-            "10"
-          ),
-          React.createElement(
-            "option",
-            { value: "11" },
-            "11"
-          ),
-          React.createElement(
-            "option",
-            { value: "12" },
-            "12"
+            "button",
+            { type: "submit", disabled: isSubmitting },
+            "Submit"
           )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "w3" },
-        React.createElement(
-          "label",
-          { htmlFor: "expYear", className: "b db f7 mb2" },
-          "Year"
-        ),
-        React.createElement(
-          "select",
-          {
-            className: "input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100",
-            id: "expYear",
-            name: "expYear",
-            type: "text",
-            value: expYear,
-            onChange: handleChange
-          },
-          React.createElement(
-            "option",
-            { disabled: true, value: "" },
-            "Select"
-          ),
-          React.createElement(
-            "option",
-            { value: "2019" },
-            "2019"
-          ),
-          React.createElement(
-            "option",
-            { value: "2020" },
-            "2020"
-          ),
-          React.createElement(
-            "option",
-            { value: "2021" },
-            "2021"
-          ),
-          React.createElement(
-            "option",
-            { value: "2022" },
-            "2022"
-          ),
-          React.createElement(
-            "option",
-            { value: "2023" },
-            "2023"
-          ),
-          React.createElement(
-            "option",
-            { value: "2024" },
-            "2024"
-          ),
-          React.createElement(
-            "option",
-            { value: "2025" },
-            "2025"
-          ),
-          React.createElement(
-            "option",
-            { value: "2026" },
-            "2026"
-          )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "w3" },
-        React.createElement(
-          "label",
-          { htmlFor: "cvv", className: "b db f7 mb2" },
-          "CVV:"
-        ),
-        React.createElement("input", {
-          className: "input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100",
-          id: "cvv",
-          name: "cvv",
-          type: "text",
-          value: cvv,
-          onChange: handleChange
-        })
-      )
-    ),
-    React.createElement(
-      "div",
-      { className: "flex justify-center" },
-      React.createElement("input", { className: "link white bg-navy dim br3 ph5 pv2", type: "submit", value: "Submit" })
+        );
+      }
     )
-  );
+  )
+  // <form className="avenir mh4" onSubmit={handleSubmit}>
+  //   <div className="mb3">
+  //     <label htmlFor="number" className="b db f7 mb2">Card Number</label>
+  //     <input
+  //       className="input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100"
+  //       id="number"
+  //       name="number"
+  //       type="text"
+  //       value={number}
+  //       onChange={handleChange}
+  //     />
+  //   </div>
+  //   <div className="mb3">
+  //     <label htmlFor="name" className="b db f7 mb2">Name on Card</label>
+  //     <input
+  //       className="input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100"
+  //       id="name"
+  //       name="name"
+  //       type="text"
+  //       value={name}
+  //       onChange={handleChange}
+  //     />
+  //   </div>
+  //   <div className="mb4 flex justify-between">
+  //     <div className="w3">
+  //       <label htmlFor="expMonth" className="b db f7 mb2">Month</label>
+  //       <select
+  //         className="input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100"
+  //         id="expMonth"
+  //         name="expMonth"
+  //         type="text"
+  //         value={expMonth}
+  //         onChange={handleChange}
+  //       >
+  //         <option disabled value="">Select</option>
+  //         <option value="01">01</option>
+  //         <option value="02">02</option>
+  //         <option value="03">03</option>
+  //         <option value="04">04</option>
+  //         <option value="05">05</option>
+  //         <option value="06">06</option>
+  //         <option value="07">07</option>
+  //         <option value="08">08</option>
+  //         <option value="09">09</option>
+  //         <option value="10">10</option>
+  //         <option value="11">11</option>
+  //         <option value="12">12</option>
+  //       </select>
+  //     </div>
+  //     <div className="w3">
+  //       <label htmlFor="expYear" className="b db f7 mb2">Year</label>
+  //       <select
+  //         className="input-reset b--light-blue bg-white br0 bl-0 br-0 bt-0 outline-0 pa1 w-100"
+  //         id="expYear"
+  //         name="expYear"
+  //         type="text"
+  //         value={expYear}
+  //         onChange={handleChange}
+  //       >
+  //         <option disabled value="">Select</option>
+  //         <option value="2019">2019</option>
+  //         <option value="2020">2020</option>
+  //         <option value="2021">2021</option>
+  //         <option value="2022">2022</option>
+  //         <option value="2023">2023</option>
+  //         <option value="2024">2024</option>
+  //         <option value="2025">2025</option>
+  //         <option value="2026">2026</option>
+  //       </select>
+  //     </div>
+  //     <div className="w3">
+  //       <label htmlFor="cvv" className="b db f7 mb2">CVV:</label>
+  //       <input
+  //         className="input-reset b--light-blue bl-0 br-0 bt-0 outline-0 pa1 w-100"
+  //         id="cvv"
+  //         name="cvv"
+  //         type="text"
+  //         value={cvv}
+  //         onChange={handleChange}
+  //       />
+  //     </div>
+  //   </div>
+  //   <div className="flex justify-center">
+  //     <input className="link white bg-navy dim br3 ph5 pv2" type="submit" value="Submit" />
+  //   </div>
+  // </form>
+  ;
 }
 
 var domContainer = document.querySelector("#App");
