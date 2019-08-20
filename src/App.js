@@ -91,21 +91,29 @@ function CreditCardForm(props) {
     cvv
   } = props;
 
+  const validate = values => {
+    let errors = {};
+
+    if (!values.number) {
+      errors.number = 'Required';
+    } else if (
+      !/^(?:\d[ -]*?){13,16}$/gm.test(values.number)
+    ) {
+      errors.number = 'Invalid number';
+    }
+
+    if (!values.name) {
+      errors.name = 'Required';
+    }
+
+    return errors;
+  }
+
   return (
     <div>
       <Formik.Formik
         initialValues={{ number, name }}
-        validate={values => {
-          let errors = {};
-          if (!values.number) {
-            errors.number = 'Required';
-          } else if (
-            !/^(?:\d[ -]*?){13,16}$/gm.test(values.number)
-          ) {
-            errors.number = 'Invalid number';
-          }
-          return errors;
-        }}
+        validate={validate}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -135,9 +143,11 @@ function CreditCardForm(props) {
               />
               <Formik.ErrorMessage name="name" component="div" />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            <div className="flex justify-center">
+              <button className="link white bg-navy dim br3 ph5 pv2" type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </div>
           </Formik.Form>
         )}
       </Formik.Formik>

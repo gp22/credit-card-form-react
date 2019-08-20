@@ -130,6 +130,22 @@ function CreditCardForm(props) {
       cvv = props.cvv;
 
 
+  var validate = function validate(values) {
+    var errors = {};
+
+    if (!values.number) {
+      errors.number = 'Required';
+    } else if (!/^(?:\d[ -]*?){13,16}$/gm.test(values.number)) {
+      errors.number = 'Invalid number';
+    }
+
+    if (!values.name) {
+      errors.name = 'Required';
+    }
+
+    return errors;
+  };
+
   return React.createElement(
     "div",
     null,
@@ -137,15 +153,7 @@ function CreditCardForm(props) {
       Formik.Formik,
       {
         initialValues: { number: number, name: name },
-        validate: function validate(values) {
-          var errors = {};
-          if (!values.number) {
-            errors.number = 'Required';
-          } else if (!/^(?:\d[ -]*?){13,16}$/gm.test(values.number)) {
-            errors.number = 'Invalid number';
-          }
-          return errors;
-        },
+        validate: validate,
         onSubmit: function onSubmit(values, _ref) {
           var setSubmitting = _ref.setSubmitting;
 
@@ -193,9 +201,13 @@ function CreditCardForm(props) {
             React.createElement(Formik.ErrorMessage, { name: "name", component: "div" })
           ),
           React.createElement(
-            "button",
-            { type: "submit", disabled: isSubmitting },
-            "Submit"
+            "div",
+            { className: "flex justify-center" },
+            React.createElement(
+              "button",
+              { className: "link white bg-navy dim br3 ph5 pv2", type: "submit", disabled: isSubmitting },
+              "Submit"
+            )
           )
         );
       }
